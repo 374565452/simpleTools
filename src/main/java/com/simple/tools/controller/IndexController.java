@@ -12,7 +12,7 @@ public class IndexController {
 		return "index";
 	}
 	
-	@RequestMapping("/{path}")
+	@RequestMapping("/tools/{path}")
 	public String page(@PathVariable String path){
 		return path;
 	}
