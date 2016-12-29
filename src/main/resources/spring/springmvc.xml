@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+        http://www.springframework.org/schema/mvc 
+        http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+         http://www.springframework.org/schema/aop
+         http://www.springframework.org/schema/aop/spring-aop.xsd 
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+	<!-- <context:property-placeholder location="classpath:resource/rds.properties" 
+		/> <context:component-scan base-package="com.cov001.rds.core" /> <context:component-scan 
+		base-package="com.cov001.rds.controller" /> <import resource="classpath:resource/config.xml"/> -->
+		
+			
+	<!-- 增加aop实现拦截
+		如果想使用aop。必须将
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd 
+		放在xsi:schemaLocation下。同时还要配置xmlns:aop="http://www.springframework.org/schema/aop"
+	 -->
+	<context:component-scan base-package="com.cov.rds.service.manager.aop"/>
+	<aop:aspectj-autoproxy proxy-target-class="true"/>	
+	<!--   引用外部配置文件信息
+	<import resource="classpath:res/project-config.xml" />
+	-->
+	<context:component-scan base-package="com.simple.tools.controller" />
+	<mvc:annotation-driven />
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/jsp/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+	<!-- 资源映射 -->
+	<mvc:resources location="/WEB-INF/css/" mapping="/css/**" />
+	<mvc:resources location="/WEB-INF/js/" mapping="/js/**" />
+	<mvc:resources location="/WEB-INF/fonts" mapping="/fonts/**" />
+	<mvc:resources location="/WEB-INF/images" mapping="/images/**" />
+	<mvc:resources location="/WEB-INF/app" mapping="/app/**" />
+	<!-- 拦截器定义 <mvc:interceptors> 国际化操作拦截器 如果采用基于（请求/Session/Cookie）则必需配置 <bean 
+		class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor" /> 如果不定义 
+		mvc:mapping path 将拦截所有的URL请求 <bean class="com.cov001.rds.controller.interceptor.AuthInterceptor"></bean> 
+		<mvc:interceptor> 如果不定义 mvc:mapping path 将拦截所有的URL请求 <mvc:mapping path="/rds/**"/> 
+		<bean class="com.cov001.rds.controller.interceptor.AuthInterceptor"/> </mvc:interceptor> 
+		</mvc:interceptors> -->
+
+	<!-- 定义文件上传解析器 -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+
+		<!-- 设定默认编码 -->
+		<property name="defaultEncoding" value="UTF-8"></property>
+		<!-- 设定文件上传的最大值5MB，5*1024*1024 -->
+		<property name="maxUploadSize" value="5242880"></property>
+	</bean>
+</beans>
