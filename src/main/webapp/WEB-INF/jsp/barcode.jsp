@@ -7,8 +7,7 @@
 	<!-- page-header属性会在文字下方显示一条横线 -->
 
 	<ul class="nav nav-tabs" id="myTab">
-		<li><a href="#ercode">生成二维码</a></li>
-		<li><a href="#ercodeshi">二维码识别</a></li>
+		<li><a href="#barcode">条形码生成</a></li>
 	</ul>
 	<div class="error-container">
 		<div id="errorDiv" class="alert alert-danger alert-dismissible"

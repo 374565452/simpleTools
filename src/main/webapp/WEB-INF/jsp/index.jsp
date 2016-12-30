@@ -3,7 +3,7 @@
 
 <%@include file="header.jsp" %>
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-				<h1 class="page-header">Dashboard</h1>
+				<h1 class="page-header">常用工具</h1>
 				<!-- page-header属性会在文字下方显示一条横线 -->
 
 				<ul class="nav nav-tabs" id="myTab">
@@ -87,7 +87,7 @@
 						<table class="compare-table">
 							<tr>
 								<td class="compare-first"><textarea id="txtSourceMd5"
-										class="form-control " rows="15">666666</textarea></td>
+										class="form-control " rows="15">MD5加密</textarea></td>
 								<td class="compare-second">
 									<p>
 										<input id="rad16" type="radio" name="radHalf" /><label
