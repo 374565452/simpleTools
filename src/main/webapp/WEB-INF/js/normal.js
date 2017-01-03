@@ -22,4 +22,12 @@ $(function(){
 			});
 		}
 	});
+	
+	$("#btnNetty").click(function(){
+		callHttp("/tcp/netty",null,function(data){
+			$("#nettyResult").val(data.data);
+			//alert(data.data);
+		});
+	});
+	
 });
