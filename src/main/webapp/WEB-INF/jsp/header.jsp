@@ -63,6 +63,6 @@
 					<li data-flag="ercode"><a href="/tools/ercode">二维码生成</a></li>
 					<li data-flag="barcode"><a href="/tools/barcode">条形码生成</a></li>
 					<li data-flag="docs"><a href="/tools/docs">常用参考表</a></li>
-					<li data-flag="communication"><a href="/tools/webcom">web、TCP/IP测试</a></li>
+					<li data-flag="webcom"><a href="/tools/webcom">web、TCP/IP测试</a></li>
 				</ul>
 			</div>
