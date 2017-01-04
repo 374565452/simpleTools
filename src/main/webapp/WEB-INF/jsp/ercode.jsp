@@ -2,6 +2,12 @@
 	pageEncoding="utf-8"%>
 
 <%@include file="header.jsp"%>
+
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 	<h1 class="page-header">二维码</h1>
 	<!-- page-header属性会在文字下方显示一条横线 -->
@@ -48,19 +54,21 @@
 							</tr>
 							<tr>
 								<td></td>
-								<td><input id="chkTrans" type="checkbox"
-									class="form-control" /> <label for="chkTrans" class="lblNormal">背景透明</label>
+								<td><input id="chkTrans" type="checkbox" /> <label for="chkTrans" class="lblNormal">背景透明</label>
 								</td>
 							</tr>
 						</table>
 					</td>
 					<td class="compare-second">
 						<p>
-							<button id="btnErcode" class="btn btn-primary">生成 &gt;</button>
+							<button id="btnErcode" class="btn btn-primary">生成（直接参数）</button>
+						</p>
+						<p>
+							<button id="btnErcodeWithMode" class="btn btn-primary">生成(model)</button>
 						</p>
 					</td>
 					<td class="compare-third"><img id="imgPreview"
-						class="img-thumbnail" src="/Images/ercode.png"
+						class="img-thumbnail" src="../images/erCode.png"
 						style="max-width: 150px; max-height: 150px;" />
 						<p class="mt15">[ 请右击图片另存为... ]</p></td>
 

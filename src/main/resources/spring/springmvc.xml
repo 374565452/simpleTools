@@ -15,6 +15,7 @@
         http://www.springframework.org/schema/context/spring-context-4.0.xsd
         http://www.springframework.org/schema/websocket 
         http://www.springframework.org/schema/websocket/spring-websocket-4.1.xsd">
+       
 	<!-- <context:property-placeholder location="classpath:resource/rds.properties" 
 		/> <context:component-scan base-package="com.cov001.rds.core" /> <context:component-scan 
 		base-package="com.cov001.rds.controller" /> <import resource="classpath:resource/config.xml"/> -->
@@ -57,9 +58,12 @@
 	<!-- 资源映射 -->
 	<mvc:resources location="/WEB-INF/css/" mapping="/css/**" />
 	<mvc:resources location="/WEB-INF/js/" mapping="/js/**" />
-	<mvc:resources location="/WEB-INF/fonts" mapping="/fonts/**" />
-	<mvc:resources location="/WEB-INF/images" mapping="/images/**" />
-	<mvc:resources location="/WEB-INF/app" mapping="/app/**" />
+	<!-- 2017-1-4在调试时，放置在/WEB-INF/images目录下的图片，一直访问不了。
+		调试大约一个小时，最终解决问题，由于我自己在配置过程中将location的值设置为/WEB-INF/images，在images后面
+		少掉一个/，所有导致一直不能访问图片
+	 -->
+	<mvc:resources location="/WEB-INF/fonts/" mapping="/fonts/**" />
+	<mvc:resources location="/WEB-INF/images/" mapping="/images/**" />
 	<!-- 拦截器定义 <mvc:interceptors> 国际化操作拦截器 如果采用基于（请求/Session/Cookie）则必需配置 <bean 
 		class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor" /> 如果不定义 
 		mvc:mapping path 将拦截所有的URL请求 <bean class="com.cov001.rds.controller.interceptor.AuthInterceptor"></bean> 
