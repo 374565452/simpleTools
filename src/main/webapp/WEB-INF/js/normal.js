@@ -30,4 +30,13 @@ $(function(){
 		});
 	});
 	
+	$("#btnWebSocket").click(function(){
+		var src=$("#webSocketTest").val().trim();
+		if(src==""){
+			error("发送内容不能为空，请填写必要的发送信息！");
+		}else{
+			websocketSend(src);
+		}
+	});
+	
 });

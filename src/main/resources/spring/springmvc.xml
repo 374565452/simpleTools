@@ -3,6 +3,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:websocket="http://www.springframework.org/schema/websocket"
 	xsi:schemaLocation="
 	http://www.springframework.org/schema/beans 
 	http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
@@ -11,12 +12,14 @@
          http://www.springframework.org/schema/aop
          http://www.springframework.org/schema/aop/spring-aop.xsd 
         http://www.springframework.org/schema/context 
-        http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+        http://www.springframework.org/schema/context/spring-context-4.0.xsd
+        http://www.springframework.org/schema/websocket 
+        http://www.springframework.org/schema/websocket/spring-websocket-4.1.xsd">
 	<!-- <context:property-placeholder location="classpath:resource/rds.properties" 
 		/> <context:component-scan base-package="com.cov001.rds.core" /> <context:component-scan 
 		base-package="com.cov001.rds.controller" /> <import resource="classpath:resource/config.xml"/> -->
 		
-			
+
 	<!-- 增加aop实现拦截
 		如果想使用aop。必须将
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd 
@@ -30,7 +33,22 @@
 	<context:component-scan base-package="com.simple.tools.controller" />
 	<context:component-scan base-package="com.simple.tools.listener" />
 	<context:component-scan base-package="com.simple.tools.netty" />
-	<mvc:annotation-driven />
+	<context:component-scan base-package="com.simple.tools.websocket"/>
+	<mvc:annotation-driven >
+		<!-- 避免IE执行AJAX时,返回JSON出现下载文件 -->
+		<mvc:message-converters register-defaults="true">
+			 <bean
+				class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
+				<property name="supportedMediaTypes">
+					<list>
+						<value>application/json;charset=UTF-8</value>
+						<!-- 一定要加上下面的一句话，才可以解决IE中执行Ajax操作，返加JSON出现下载文件的情况 -->
+						<value>text/html;charset=UTF-8</value>
+					</list>
+				</property>
+			</bean> 
+		</mvc:message-converters>
+	</mvc:annotation-driven>
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/jsp/" />

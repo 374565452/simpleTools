@@ -24,7 +24,7 @@ public class ApplicationListenerImpl implements ApplicationContextAware,ServletC
 	//经进测试，onApplicationEvent这个方法会执行多次，所以不建议在此方法中执行初始化操作
 	@Override
 	public void onApplicationEvent(ApplicationEvent arg0) {
-		System.out.println(" on  application event----------------");
+		//System.out.println(" on  application event----------------");
 		//new NettyServer().bind();
 		
 	}
