@@ -9,6 +9,7 @@ import javax.imageio.ImageIO;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Test;
 
+import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
 import com.simple.tools.utils.QRErrorCorrection;
 import com.simple.tools.utils.QRUtils;
@@ -54,5 +55,23 @@ public class QRTest {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	@Test
+	public void testCreateBarCode(){
+		
+		String content="6923450656150";
+		int width=250;
+		int height=100;
+		BufferedImage image=QRUtils.createBarcode(content, width, height, BarcodeFormat.EAN_13);
+		if(image != null){
+			try {
+				ImageIO.write(image, "png", new File("e:\\" + "/" +RandomStringUtils.randomAlphanumeric(8)+".png"));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
 	}
 }
