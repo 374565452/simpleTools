@@ -133,6 +133,17 @@
 			<version>3.3.0</version>
 		</dependency>
 		<!-- add 2017-1-4 二维码jar包测试 -->
+		<!-- add 2017-1-5 添加一维码jar包 pom文件 -->
+		<!-- <dependency> <groupId>net.sf.barcode4j</groupId> <artifactId>barcode4j-light</artifactId> 
+			<version>2.0</version> </dependency> -->
+		<!-- add 2017-1-5 添加一维码jar包 pom文件 -->
+		<!-- add 2017-1-5 添加 测试base64 -->
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>1.10</version>
+		</dependency>
+		<!-- add 2017-1-5 添加 测试base64 -->
 	</dependencies>
 
 	<build>
@@ -151,23 +162,22 @@
 				</plugin>
 				<plugin>
 					<!-- 配置如下编译环境后，就可以看到项目的JRE System Library 包后面带有JavaSE-1.8的字样 -->
+					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-compiler-plugin</artifactId>
 					<configuration>
 						<source>1.8</source>
 						<target>1.8</target>
+						<encoding>UTF-8</encoding>
+						<!-- 通过下面的配置可以使用WEB-INF\lib目录下的jar包 现在我只是配置在这个地方，具体还没有进行测试 -->
+						<compilerArguments>
+							<extdirs>src\main\webapp\WEB-INF\lib</extdirs>
+						</compilerArguments>
 					</configuration>
 				</plugin>
 
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-compiler-plugin</artifactId>
-					<version>3.3</version>
-					<configuration>
-						<source>1.7</source>
-						<target>1.7</target>
-						<encoding>UTF-8</encoding>
-					</configuration>
-				</plugin>
+				<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-compiler-plugin</artifactId> 
+					<version>3.3</version> <configuration> <source>1.7</source> <target>1.7</target> 
+					<encoding>UTF-8</encoding> </configuration> </plugin> -->
 
 
 

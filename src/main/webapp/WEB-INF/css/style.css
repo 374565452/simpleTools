@@ -165,3 +165,10 @@
 .inner-table td{padding:10px 0px;text-align:left;}
 .td-bordered{border:1px solid #ccc;padding:10px;}
 .mt15{margin-top:15px;}
+.compress-tip,.length-tip{display:none;float:right;width:auto;text-align:right;}
+.CodeMirror{border:1px solid #ddd;}
+textarea {
+    font-size:13px !important;
+    line-height:150% !important;
+    text-decoration:none !important;
+}

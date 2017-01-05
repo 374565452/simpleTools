@@ -57,6 +57,7 @@ public class QRTest {
 		}
 	}
 	
+	//此处是利用zxing来生成条形码，生成条形码后在下面没有显示出具体的数字
 	@Test
 	public void testCreateBarCode(){
 		
@@ -74,4 +75,6 @@ public class QRTest {
 		}
 		
 	}
+	
+	
 }

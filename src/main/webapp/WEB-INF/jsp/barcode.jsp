@@ -22,27 +22,27 @@
 							<tr>
 								<td>类型：</td>
 								<td><select id="selType" class="form-control">
-										<option>AZTEC</option>
+										<!--  <option>AZTEC</option>-->
 										<option>CODABAR</option>
 										<option>CODE_39</option>
 										<option>CODE_93</option>
 										<option>CODE_128</option>
-										<option>DATA_MATRIX</option>
+										<!-- <option>DATA_MATRIX</option> -->
 										<option>EAN_8</option>
 										<option selected="selected">EAN_13</option>
-										<option>ITF</option>
+										<!-- <option>ITF</option>
 										<option>MAXICODE</option>
 										<option>PDF_417</option>
 										<option>QR_CODE</option>
 										<option>RSS_14</option>
-										<option>RSS_EXPANDED</option>
+										<option>RSS_EXPANDED</option> -->
 										<option>UPC_A</option>
 										<option>UPC_E</option>
 										<option>All_1D</option>
-										<option>UPC_EAN_EXTENSION</option>
+										<!-- <option>UPC_EAN_EXTENSION</option> -->
 										<option>MSI</option>
-										<option>PLESSEY</option>
-										<option>JAN13</option>
+										<!-- <option>PLESSEY</option>
+										<option>JAN13</option> -->
 								</select></td>
 							</tr>
 							<tr>
@@ -51,14 +51,14 @@
 									value="6923450656150" /></td>
 							</tr>
 							<tr>
-								<td>宽度：</td>
+								<td>条码密度：</td>
 								<td><input id="txtWidth" type="text" class="form-control"
-									value="250" /></td>
+									value="0.6" /></td>
 							</tr>
 							<tr>
-								<td>高度：</td>
+								<td>条码高度：</td>
 								<td><input id="txtHeight" type="text" class="form-control"
-									value="100" /></td>
+									value="20" /></td>
 							</tr>
 							<tr>
 								<td></td>
@@ -73,7 +73,7 @@
 						</p>
 					</td>
 					<td class="compare-third"><img id="imgPreview"
-						class="img-thumbnail" src="/Images/barcode.png"
+						class="img-thumbnail" src="../images/barCode.png"
 						style="width: 250px; height: 100px;" />
 						<p class="mt15">[ 请右击图片另存为... ]</p></td>
 				</tr>

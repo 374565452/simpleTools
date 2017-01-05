@@ -198,7 +198,7 @@ public class QRUtils {
 	}
 
 	/**
-	 * 产生条形码
+	 * 产生条形码，利用zxing生成的条形码下面没有字符
 	 * 
 	 * @param content
 	 * @param width

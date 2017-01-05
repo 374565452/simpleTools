@@ -14,7 +14,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.zxing.BarcodeFormat;
+import com.simple.tools.model.BarCodeParam;
 import com.simple.tools.model.QRCodeParam;
+import com.simple.tools.utils.BarCodeFormat;
+import com.simple.tools.utils.BarCodeUtils;
+import com.simple.tools.utils.Base64Utils;
 import com.simple.tools.utils.GuidUtils;
 import com.simple.tools.utils.JsonResult;
 import com.simple.tools.utils.Md5Utils;
@@ -77,7 +82,12 @@ public class FunctionToolsController extends BaseController{
 		
 		BufferedImage qrImage=QRUtils.createImage(text, size, correction, margin);
 		if(qrImage != null){
-			response.setDateHeader("Expires", 0);
+			try {
+				responseImageStream(qrImage);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			/*response.setDateHeader("Expires", 0);
 			response.addHeader("Pragma", "no-cache");
 			response.setHeader("Cache-Control", "no-cache, no-store, max-age=0");
 			response.setContentType("image/jpeg");
@@ -89,7 +99,7 @@ public class FunctionToolsController extends BaseController{
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
+			}*/
 		}
 		
 	}
@@ -106,7 +116,6 @@ public class FunctionToolsController extends BaseController{
 		try {
 			text=java.net.URLDecoder.decode(text,"UTF-8");
 		} catch (UnsupportedEncodingException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		System.out.println("text = "+text);
@@ -131,7 +140,12 @@ public class FunctionToolsController extends BaseController{
 		
 		BufferedImage qrImage=QRUtils.createImage(text, param.getSize(), correction, param.getMargin());
 		if(qrImage != null){
-			response.setDateHeader("Expires", 0);
+			try {
+				responseImageStream(qrImage);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			/*response.setDateHeader("Expires", 0);
 			response.addHeader("Pragma", "no-cache");
 			response.setHeader("Cache-Control", "no-cache, no-store, max-age=0");
 			response.setContentType("image/jpeg");
@@ -143,9 +157,51 @@ public class FunctionToolsController extends BaseController{
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
+			}*/
 		}
-		
 	}
 	
+	@RequestMapping(value="/barCode",method=RequestMethod.GET)
+	@ResponseBody
+	public void getBarCode(@ModelAttribute BarCodeParam param){
+		try {
+			String content=urlParamsToUTF8(param.getContent());
+			String width=urlParamsToUTF8(param.getWidth());
+			String height=urlParamsToUTF8(param.getHeight());
+			String type=urlParamsToUTF8(param.getType());
+			System.out.println("content = "+content);
+			System.out.println("width = "+width);
+			System.out.println("height = "+height);
+			System.out.println("type = "+type);
+			BufferedImage image=null;
+			if(type.equals("EAN_13")){
+				image=BarCodeUtils.createBarCode(content, width, height, BarCodeFormat.EAN_13);
+			}else if(type.equals("CODE_128")){
+				image=BarCodeUtils.createBarCode(content, width, height, BarCodeFormat.CODE_128);
+			}
+			if(image != null){
+				System.out.println("----------------");
+					responseImageStream(image);
+				}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@RequestMapping(value="/base64encode",method=RequestMethod.POST)
+	@ResponseBody
+	public JsonResult getBase64Encode(@RequestParam(name="txt") String src){
+		//System.out.println("the src is  ==== "+src);
+		String encode=Base64Utils.base64Encode(src);
+		return new JsonResult(encode);
+	}
+	
+	@RequestMapping(value="/base64decode",method=RequestMethod.POST)
+	@ResponseBody
+	public JsonResult getBase64Decode(@RequestParam(value="txt") String src){
+		//经测试，@RequestParam 这里用name="txt"与value="txt"效果是一样的，但设置value="txt"后面可以增加required=true这个属性
+		System.out.println("the src is  ==== "+src);
+		String encode=Base64Utils.base64Decode(src);
+		return new JsonResult(encode);
+	}
 }

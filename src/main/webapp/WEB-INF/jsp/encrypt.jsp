@@ -8,6 +8,7 @@
 
 	<ul class="nav nav-tabs" id="myTab">
 		<li><a href="#md5">MD5</a></li>
+		<li><a href="#base64">Base64</a></li>
 	</ul>
 	<div class="error-container">
 		<div id="errorDiv" class="alert alert-danger alert-dismissible"
@@ -37,7 +38,26 @@
 				</tr>
 			</table>
 		</div>
-
+		<div class="tab-pane" id="base64">
+			<table class="compare-table">
+				<tr>
+					<td class="compare-first"><textarea id="txtSourceBase64"
+							class="form-control " rows="15">123456</textarea></td>
+					<td class="compare-second">
+						<p>
+							<button id="btnBase64Encode" class="btn btn-primary">编码
+								&gt;</button>
+						</p>
+						<p>
+							<button id="btnBase64Decode" class="btn btn-primary">&lt;
+								解码</button>
+						</p>
+					</td>
+					<td class="compare-third"><textarea id="txtDestBase64"
+							class="form-control" rows="15"></textarea></td>
+				</tr>
+			</table>
+		</div>
 
 	</div>
 </div>
