@@ -62,7 +62,7 @@ public class JsonFormatTest {
 		 String string = mapper.writeValueAsString(a1);
 		 System.out.println("no format the value is ----"+string);
 		 
-		 String formatString=JsonFormatUtils.formatJson(string);
+		 String formatString=JsonFormatUtils.formatJson2(string);
 		 System.out.println("after format the value is -------"+formatString);
 	}
 	

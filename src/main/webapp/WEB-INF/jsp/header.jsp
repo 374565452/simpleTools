@@ -42,7 +42,7 @@
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav navbar-right">
 					<li><a href="#">赞助名单</a></li>
-					<li><a href="#">意见反聩</a></li>
+					<li><a href="#">意见反馈</a></li>
 					<li><a href="#">开发日志</a></li>
 					<li><a href="#">关于本站</a></li>
 				</ul>

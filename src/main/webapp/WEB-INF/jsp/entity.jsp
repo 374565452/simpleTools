@@ -18,33 +18,30 @@
 		<div class="tab-pane active" id="json">
 			<table class="compare-table">
 				<tr>
-					<td class="compare-first"><textarea id="txtSourceJsonEntity"
-							class="form-control" rows="15">{
-    "ID": 1,
-    "Name": "jack",
-    "Address": {
-        "Province": "浙江",
-        "City": {
-            "Name": "杭州",
-            "Code": "310000"
-        }
-    },
-    "Hobby": [
-        {
-            "Category": "运动",
-            "Name": "篮球"
-        },
-        {
-            "Category": "音乐",
-            "Name": "小提琴"
-        }
-    ]
-}</textarea></td>
+					<td class="compare-first">
+						<table class="inner-table">
+							<tr>
+								<td>内容：</td>
+								<td><textarea id="txtSourceJsonEntity" class="form-control"
+										rows="15"> {"name":"a1","password":"11","students":[{"name":"a2","password":"12","students":null,"age":12,"going":false,"maps":null},{"name":"a3","password":"13","students":null,"age":13,"going":true,"maps":null}],"age":10,"going":true,"maps":{"k1":{"name":"a4","password":"14","students":null,"age":14,"going":true,"maps":null},"k2":{"name":"a5","password":"53","students":null,"age":15,"going":true,"maps":null}}}</textarea></td>
+							</tr>
+							<tr>
+								<td>包名：</td>
+								<td><input id="txtPackage" type="text" class="form-control"
+									value="com.parse.jsonbean" placeholder="com.parse.jsonbean" /></td>
+							</tr>
+							<tr>
+								<td>类名：</td>
+								<td><input id="txtClass" type="text" class="form-control"
+									value="ParseBean" placeholder="ParseBean" /></td>
+							</tr>
+						</table>
+					</td>
 					<td class="compare-second">
 						<p>
 							<select class="form-control" style="width: 60%; margin: 0 auto;">
-								<option>C#</option>
 								<option>Java</option>
+								<option>C#</option>
 							</select>
 						</p>
 						<p>
@@ -66,8 +63,8 @@
 					<td class="compare-second">
 						<p>
 							<select class="form-control" style="width: 60%; margin: 0 auto;">
-								<option>C#</option>
 								<option>Java</option>
+								<option>C#</option>
 							</select>
 						</p>
 						<p>

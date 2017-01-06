@@ -26,15 +26,17 @@
 			<table class="compare-table">
 				<tr>
 					<td class="compare-first"><textarea id="txtSourceJson"
-							class="form-control " rows="15"> {&quot;code&quot;: 1, &quot;value&quot;: 9}</textarea>
+							class="form-control " rows="15"> {"name":"a1","password":"11","students":[{"name":"a2","password":"12","students":null,"age":12,"going":false,"maps":null},{"name":"a3","password":"13","students":null,"age":13,"going":true,"maps":null}],"age":10,"going":true,"maps":{"k1":{"name":"a4","password":"14","students":null,"age":14,"going":true,"maps":null},"k2":{"name":"a5","password":"53","students":null,"age":15,"going":true,"maps":null}}}</textarea>
 					</td>
 					<td class="compare-second">
 						<p>
 							<button id="btnJson" class="btn btn-primary">格式化 &gt;</button>
 						</p>
+						<!--  
 						<p>
 							<button id="btnCopyJson" class="btn btn-default">复制结果</button>
 						</p>
+						-->
 					</td>
 					<td class="compare-third"><textarea id="txtDestJson"
 							class="form-control" rows="15"></textarea></td>

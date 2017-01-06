@@ -1,11 +1,7 @@
 package com.simple.tools.controller;
 
 import java.awt.image.BufferedImage;
-import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-
-import javax.imageio.ImageIO;
-import javax.servlet.ServletOutputStream;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -14,14 +10,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.google.zxing.BarcodeFormat;
+import com.alibaba.fastjson.JSONObject;
 import com.simple.tools.model.BarCodeParam;
 import com.simple.tools.model.QRCodeParam;
 import com.simple.tools.utils.BarCodeFormat;
 import com.simple.tools.utils.BarCodeUtils;
 import com.simple.tools.utils.Base64Utils;
 import com.simple.tools.utils.GuidUtils;
+import com.simple.tools.utils.JsonFormatUtils;
 import com.simple.tools.utils.JsonResult;
+import com.simple.tools.utils.JsonUtils;
 import com.simple.tools.utils.Md5Utils;
 import com.simple.tools.utils.QRErrorCorrection;
 import com.simple.tools.utils.QRUtils;
@@ -155,7 +153,6 @@ public class FunctionToolsController extends BaseController{
 				out.flush();
 				out.close();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}*/
 		}
@@ -203,5 +200,44 @@ public class FunctionToolsController extends BaseController{
 		System.out.println("the src is  ==== "+src);
 		String encode=Base64Utils.base64Decode(src);
 		return new JsonResult(encode);
+	}
+	
+	@RequestMapping(value="/jsonformat",method=RequestMethod.POST)
+	@ResponseBody
+	public JsonResult getFormatJson(@RequestParam(name="json")String json){
+		JsonResult result=new JsonResult();
+		try {
+			//这里利用fastjson来判断传入的字符串是否符合json格式，如果符合，则不会抛同异常信息，不符合则会抛出异常信息
+			JSONObject.parseObject(json);
+			String formatString=JsonFormatUtils.formatJson2(json);
+			result.setFlag(true);
+			result.setData(formatString);
+			//new ObjectMapper().readV
+		} catch (Exception e) {
+			e.printStackTrace();
+			result.setFlag(false);
+			result.setError("传入的字符串格式不正确。。。。。。");
+		}
+		return result;
+	}
+	
+	@RequestMapping(value="/jsonparse",method=RequestMethod.POST)
+	@ResponseBody
+	public JsonResult jsonParseBean(@RequestParam(name="json")String json,
+			@RequestParam(name="packageName")String packageName,@RequestParam String className){
+		JsonResult result=new JsonResult();
+		try {
+			//这里利用fastjson来判断传入的字符串是否符合json格式，如果符合，则不会抛同异常信息，不符合则会抛出异常信息
+			JSONObject.parseObject(json);
+			String javaBeanString=JsonUtils.getJavaFromJson(packageName,className, json);
+			result.setFlag(true);
+			result.setData(javaBeanString);
+			//new ObjectMapper().readV
+		} catch (Exception e) {
+			e.printStackTrace();
+			result.setFlag(false);
+			result.setError("传入的字符串格式不正确。。。。。。");
+		}
+		return result;
 	}
 }

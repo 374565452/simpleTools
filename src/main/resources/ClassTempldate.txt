@@ -1,0 +1,13 @@
+package ###pkgName###.domain;
+
+import com.alibaba.fastjson.JSONObject;
+
+public class ###VoName### { 
+
+	###columns###
+	
+	@Override
+	public String toString() {
+		return JSONObject.toJSONString(this);
+	}
+}
