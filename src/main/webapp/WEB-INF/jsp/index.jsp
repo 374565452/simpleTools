@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
+	pageEncoding="utf-8" import="java.util.*"%>
 
 <%@include file="header.jsp"%>
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
@@ -7,6 +7,7 @@
 	<!-- page-header属性会在文字下方显示一条横线 -->
 
 	<ul class="nav nav-tabs" id="myTab">
+		<li><a href="#localIP">本机IP</a></li>
 		<li><a href="#json">json格式化</a></li>
 		<li><a href="#urlencode">UrlEncode</a></li>
 		<li><a href="#htmlencode">HtmlEncode</a></li>
@@ -22,7 +23,77 @@
 			role="alert" style="display: none;">错误：解码错误</div>
 	</div>
 	<div class="tab-content">
-		<div class="tab-pane active" id="json">
+		<div class="tab-pane active" id="localIP">
+			<table class="table table-hover table-bordered">
+				<tbody>
+					<tr>
+						<td style="width: 150px;">本机IP</td>
+						<td><%=request.getRemoteHost()%></td>
+						<%
+							/*System.out.println("Protocol: " + request.getProtocol());
+							System.out.println("Scheme: " + request.getScheme());
+							System.out.println("Server Name: " + request.getServerName());
+							System.out.println("Server Port: " + request.getServerPort());
+							System.out.println("Protocol: " + request.getProtocol());
+							System.out.println("Server Info: " + getServletConfig().getServletContext().getServerInfo());
+							System.out.println("Remote Addr: " + request.getRemoteAddr());
+							System.out.println("Remote Host: " + request.getRemoteHost());
+							System.out.println("Character Encoding: " + request.getCharacterEncoding());
+							System.out.println("Content Length: " + request.getContentLength());
+							System.out.println("Content Type: " + request.getContentType());
+							System.out.println("Auth Type: " + request.getAuthType());
+							System.out.println("HTTP Method: " + request.getMethod());
+							System.out.println("Path Info: " + request.getPathInfo());
+							System.out.println("Path Trans: " + request.getPathTranslated());
+							System.out.println("Query String: " + request.getQueryString());
+							System.out.println("Remote User: " + request.getRemoteUser());
+							System.out.println("Session Id: " + request.getRequestedSessionId());
+							System.out.println("Request URI: " + request.getRequestURI());
+							System.out.println("Servlet Path: " + request.getServletPath());
+							System.out.println("Accept: " + request.getHeader("Accept"));
+							System.out.println("Host: " + request.getHeader("Host"));
+							System.out.println("Referer : " + request.getHeader("Referer"));
+							System.out.println("Accept-Language : " + request.getHeader("Accept-Language"));
+							System.out.println("Accept-Encoding : " + request.getHeader("Accept-Encoding"));
+							System.out.println("User-Agent : " + request.getHeader("User-Agent"));
+							System.out.println("Connection : " + request.getHeader("Connection"));
+							System.out.println("Cookie : " + request.getHeader("Cookie"));*/
+						%>
+
+						
+						
+					</tr>
+					<%
+							Enumeration enumNames;
+							String strName, strValue;
+							enumNames = request.getHeaderNames();
+							while (enumNames.hasMoreElements()) {
+								strName = (String) enumNames.nextElement();
+								strValue = request.getHeader(strName);
+								//System.out.println(strName);
+								//System.out.println(strValue);
+							
+						%>
+						<tr>
+							<td><%=strName %></td>
+							<td><%=strValue %>
+						</tr>
+					<%} %>
+					<tr>
+						<td>分辨率</td>
+						<td id="tdRatio"></td>
+					</tr>
+				</tbody>
+			</table>
+			<script>
+				$(function() {
+					$("#tdRatio").html(
+							window.screen.width + " * " + window.screen.height);
+				})
+			</script>
+
+		</div>
+		<div class="tab-pane" id="json">
 			<table class="compare-table">
 				<tr>
 					<td class="compare-first"><textarea id="txtSourceJson"
@@ -31,8 +102,7 @@
 					<td class="compare-second">
 						<p>
 							<button id="btnJson" class="btn btn-primary">格式化 &gt;</button>
-						</p>
-						<!--  
+						</p> <!--  
 						<p>
 							<button id="btnCopyJson" class="btn btn-default">复制结果</button>
 						</p>
@@ -186,6 +256,7 @@
 			<textarea spellcheck="false" id="txtSourceLen" class="form-control "
 				rows="15">hello world!世界</textarea>
 			<p class="mt15">
+			
 			<div class="alert alert-warning alert-dismissible compress-tip"
 				role="alert">压缩比：100%</div>
 			<div class="alert alert-warning alert-dismissible length-tip"
