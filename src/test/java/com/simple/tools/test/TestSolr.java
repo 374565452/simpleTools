@@ -50,7 +50,6 @@ public class TestSolr {
 			System.out.println(solrDocument.get("item_title"));
 			//System.out.println(solrDocument.get("item_price"));
 			//System.out.println(solrDocument.get("item_image"));
-			
 		}
 	}
 }
