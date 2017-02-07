@@ -1,6 +1,9 @@
 package com.simple.tools.solr;
 
 import java.lang.reflect.Field;
+
+import org.apache.solr.client.solrj.SolrClient;
+import org.apache.solr.client.solrj.impl.CloudSolrClient;
 import org.apache.solr.client.solrj.impl.HttpSolrClient;
 import org.apache.solr.client.solrj.impl.XMLResponseParser;
 import org.apache.solr.common.SolrDocument;
@@ -55,6 +58,17 @@ public class SolrUtils {
         return document;
     }
 
+    /***
+     * 得到集群中的solrClient对象
+     */
+    
+    public static SolrClient cloudConnect(String zkHost){
+    	
+    	//CloudSolrClient clein2=new CloudSolrClient(zkHost);
+    	CloudSolrClient client= new CloudSolrClient.Builder().withZkHost(zkHost).build();
+    	return client;
+    }
+    
     /**
      *建立solr链接，获取 HttpSolrClient
      * @return HttpSolrClient
@@ -63,6 +77,7 @@ public class SolrUtils {
 
         HttpSolrClient httpSolrClient = null;
         try{
+        
             httpSolrClient = new HttpSolrClient.Builder(url).build();
             //httpSolrClient.setParser(new XMLResponseParser());//设定xml文档解析器
             httpSolrClient.setConnectionTimeout(connectionTimeout);//socket read timeout
