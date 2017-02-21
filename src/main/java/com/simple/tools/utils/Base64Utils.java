@@ -10,6 +10,7 @@ public class Base64Utils {
 	 * @return
 	 */
 	public static String base64Decode(String str){
+		
 		byte[] bs = Base64.decodeBase64(str);
 		return new String(bs);
 	}
