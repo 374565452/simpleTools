@@ -31,13 +31,16 @@ public class HelloServerHandler extends SimpleChannelInboundHandler<String> {
 		DeviceFactory.getInstance().remove(ctx.channel());
 		System.out.println("inactive-----disconnected a client --------");
 		System.out.println("the group size is ----" + group.size());
+		ctx.channel().writeAndFlush("welcome to netty!");
 	}
 
 	@Override
 	protected void channelRead0(ChannelHandlerContext ctx, String msg) throws Exception {
 		System.out.println("RamoteAddress : " + ctx.channel().remoteAddress() + " active !");
 		//ctx.writeAndFlush("Welcome to " + InetAddress.getLocalHost().getHostName() + " service!\n");
-		DeviceFactory.getInstance().invokeData(ctx.channel().hashCode(), msg);
+		System.out.println("the receive msg is : "+msg);
+		//DeviceFactory.getInstance().invokeData(ctx.channel().hashCode(), msg);
+		ctx.channel().writeAndFlush(msg);
 	}
 	@Override
 	public void channelReadComplete(ChannelHandlerContext ctx) throws Exception {
