@@ -14,24 +14,27 @@ public class HelloServerHandler extends SimpleChannelInboundHandler<String> {
 	public HelloServerHandler(ChannelGroup group) {
 		this.group = group;
 	}
-
+	//建立连接后，最后执行这个函数 3
 	@Override
 	public void channelActive(ChannelHandlerContext ctx) throws Exception {
 		//group.add(ctx.channel());
 		// super.channelActive(ctx);
-		DeviceFactory.getInstance().put(ctx.channel());
+		//DeviceFactory.getInstance().put(ctx.channel());
 		System.out.println("active----accept a client --------the channel hashcode is" + ctx.channel().hashCode());
 		System.out.println("the group size is %d --" + group.size());
-		// ctx.channel().close();
+		System.out.println("---------------shut down the connect--------------------- ");
+		ctx.channel().writeAndFlush("Welcom to the netty !");
+		//ctx.channel().close();
 	}
 
+	//连接断开后，先执行 这个 1
 	@Override
 	public void channelInactive(ChannelHandlerContext ctx) throws Exception {
 		// super.channelInactive(ctx);
-		DeviceFactory.getInstance().remove(ctx.channel());
+		//DeviceFactory.getInstance().remove(ctx.channel());
 		System.out.println("inactive-----disconnected a client --------");
 		System.out.println("the group size is ----" + group.size());
-		ctx.channel().writeAndFlush("welcome to netty!");
+		//ctx.channel().writeAndFlush("welcome to netty!");
 	}
 
 	@Override
@@ -48,21 +51,24 @@ public class HelloServerHandler extends SimpleChannelInboundHandler<String> {
 		System.out.println("received-- complete---- --------");
 	}
 	
+	//建立连接后，再次执行这个函数2
 	@Override
 	public void channelRegistered(ChannelHandlerContext ctx) throws Exception {
 		//super.channelRegistered(ctx);
 		System.out.println("registered ---a client---- --------");
 	}
 	
+	//建立连接后，先执行这个函数 1
 	@Override
 	public void handlerAdded(ChannelHandlerContext ctx) throws Exception {
 		System.out.println("handler----added the hashcode is " +ctx.channel().hashCode());
 	}
-	
+	//连接断开后，最后执行这个函数 3
 	public void handlerRemoved(ChannelHandlerContext ctx) throws Exception {
 		System.out.println("handler----removed the hashcode is " +ctx.channel().hashCode());
 	};
 	
+	//连接断开后，再次执行这个函数 2
 	@Override
 	public void channelUnregistered(ChannelHandlerContext ctx) throws Exception {
 		//super.channelUnregistered(ctx);
